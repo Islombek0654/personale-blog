@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Page Header Start -->
+<div class="container py-5 px-2 bg-primary">
+    <div class="row py-5 px-4">
+        <div class="col-sm-6 text-center text-md-left">
+            <h1 class="mb-3 mb-md-0 text-white text-uppercase font-weight-bold">Contact Me</h1>
+        </div>
+        <div class="col-sm-6 text-center text-md-right">
+            <div class="d-inline-flex pt-2">
+                <h4 class="m-0 text-white"><a class="text-white" href="{% url 'home' %}">Home</a></h4>
+                <h4 class="m-0 text-white px-2">/</h4>
+                <h4 class="m-0 text-white">Contact Me</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+<!-- Contact Start -->
+<div class="container bg-white pt-5">
+    <div class="row px-3 pb-2">
+        <div class="col-sm-4 text-center mb-3">
+            <i class="fa fa-2x fa-phone-alt mb-3 text-primary"></i>
+            <h4 class="font-weight-bold">Phone</h4>
+            <p>+998 33 342 12 90</p>
+        </div>
+        <div class="col-sm-4 text-center mb-3" style="margin-left: 180px;">
+            <i class="far fa-2x fa-envelope mb-3 text-primary"></i>
+            <h4 class="font-weight-bold">Email</h4>
+            <p>noaway028@gmail.com</p>
+        </div>
+    </div>
+    <div class="col-md-12 pb-5">
+        <div class="contact-form">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                <div class="control-group">
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                    <p class="help-block text-danger">{{ form.name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                <div class="control-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                    <p class="help-block text-danger">{{ form.email.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                <div class="control-group">
+                    {{ form.subject.label_tag }}
+                    {{ form.subject }}
+                    {% if form.subject.errors %}
+                    <p class="help-block text-danger">{{ form.subject.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                <div class="control-group">
+                    {{ form.message.label_tag }}
+                    {{ form.message }}
+                    {% if form.message.errors %}
+                    <p class="help-block text-danger">{{ form.message.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <button class="btn btn-primary" type="submit" id="sendMessageButton">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<!-- Contact End -->
+{% endblock %}

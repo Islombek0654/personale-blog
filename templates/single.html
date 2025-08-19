@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header Start -->
+<div class="container py-5 px-2 bg-primary">
+    <div class="row py-5 px-4">
+        <div class="col-sm-6 text-center text-md-left">
+            <h1 class="mb-3 mb-md-0 text-white text-uppercase font-weight-bold">Blog Detail</h1>
+        </div>
+        <div class="col-sm-6 text-center text-md-right">
+            <div class="d-inline-flex pt-2">
+                <h4 class="m-0 text-white"><a class="text-white" href="">Home</a></h4>
+                <h4 class="m-0 text-white px-2">/</h4>
+                <h4 class="m-0 text-white">Blog Detail</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Blog Detail Start -->
+<div class="container py-5 px-2 bg-white">
+    <div class="row px-4">
+        <div class="col-12">
+            <img class="img-fluid mb-4" src="{{ blog.photo.url }}" alt="Image">
+            <h2 class="mb-3 font-weight-bold">{{ blog.title }}</h2>
+            <div class="d-flex">
+                <p class="mr-3 text-muted"><i class="fa fa-calendar-alt"></i> {{ blog.created_at }}</p>
+                <p class="mr-3 text-muted"><i class="fa fa-folder"></i> {{ blog.category }}</p>
+            </div>
+            {% if blog.content %}
+            <a href="{{ blog.content.url }}" download>⬇ Скачать файл</a>
+            {% endif %}
+            {% for topic in blog.topics.all %}
+            <h3 class="mb-3 font-weight-bold">{{ topic.title }}</h3>
+            <img class="w-50 float-left mr-4 mb-3" src="{{ topic.photo.url }}" alt="Image">
+            <p>{{ blog.content }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Blog Detail End -->
+{% endblock %}
